@@ -1,0 +1,245 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+/**/
+.title,
+.card .card-text {
+  font-family: sans-serif;
+}
+/**/
+
+body {
+  padding: 1rem;
+  background-color: #ecf3fd;
+}
+nav {
+  width: 100%;
+  min-height: 7vh;
+  max-height: fit-content;
+  /* border: 2px solid red; */
+
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsl(200, 60%, 99%);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+.nav-avatar {
+  width: 11rem;
+
+  transition: filter 0.3s ease;
+}
+
+.nav-btn {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  /* border: 2px solid black; */
+  background-color: gray;
+
+  background: url("./assets/images/icon-moon.svg");
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(236, 234, 234);
+}
+.container {
+  width: 100%;
+  height: fit-content;
+
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+}
+
+.filter-btns {
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.filter-btns-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 3rem;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+.card-container {
+  width: 100%;
+
+  margin-top: 1rem;
+  /* border: 2px solid black; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* padding: 1rem; */
+  gap: 1rem;
+}
+.card {
+  flex-basis: 380px;
+  max-width: 380px;
+
+  /* border: 2px solid red; */
+  padding: 1rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  grid-template-rows: fit-content fit-content;
+  row-gap: 2rem;
+  column-gap: 0.5rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+.card .card-text .extension-title {
+  margin-bottom: 0.5rem;
+}
+.card .card-text .extension-desc {
+  color: hsl(226, 11%, 37%);
+}
+
+.card .remove-btn {
+  font-family: sans-serif;
+  font-weight: 600;
+  border-radius: 4rem;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  width: 7rem;
+  height: fit-content;
+  background-color: white;
+  border: 1px solid hsl(226, 11%, 37%);
+  opacity: 0.8;
+  transition: background-color 0.2s ease-in-out;
+}
+.card .switch-btn {
+  width: 2.5rem;
+  height: 20px;
+  /* for div alignemnt */
+  place-content: center;
+  align-items: center;
+  place-self: center;
+
+  /* Solve problem placing it to end , which will not be user friendly  */
+  margin-left: auto;
+  /* border: 1px solid red; */
+  border-radius: 4rem;
+}
+.switch-circle {
+  width: 15px;
+
+  height: 15px;
+  align-self: center;
+  background-color: white;
+  border-radius: 50%;
+
+  cursor: pointer;
+  place-self: end;
+  position: relative;
+  right: 0%;
+  top: 0;
+
+  transition: right 0.2s ease-in-out;
+}
+
+/* important -- IS NOT PREFERABLE EXCEPTS IN CASES LIKE BELOW -- */
+/* The longer and more specific the path, the higher its specificity weight. */
+.active,
+.filter-btns .active {
+  background-color: hsl(3, 77%, 44%);
+  color: white;
+}
+.remove-btn:hover {
+  opacity: 1;
+  border-color: hsl(3, 77%, 44%);
+  background-color: hsl(3, 77%, 44%);
+  color: white;
+}
+@media screen and (max-width: 440px) {
+  .nav-avatar {
+    width: 6rem;
+    margin-left: 1rem;
+    margin-right: none;
+  }
+  .nav-btn {
+    height: 2rem;
+    width: 2rem;
+    margin-left: 1rem;
+    margin-right: none;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .card-container {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (min-width: 992px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+  }
+  .container > .filter-btns {
+    justify-content: end;
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .card {
+    flex-basis: 400px;
+  }
+}
+
+.dark-mode-parent,
+.dark-mode-child {
+  background-color: #070f2c;
+  color: white;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.dark-mode-child {
+  background-color: #0d1841;
+}
+.filter-image {
+  filter: brightness(0) invert(1);
+}
+.disabled-switch-btn {
+  background-color: gray;
+}
+.move-circle {
+  position: relative;
+  right: 60%;
+  top: 0;
+}
+.remove-card {
+  display: none;
+}
+
+.change-background-image {
+  background: url("./assets/images/icon-sun.svg");
+
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-color: red; */
+}
