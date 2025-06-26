@@ -1,5 +1,5 @@
 // fetch json file
-const jsonFilePath = "./data.json";
+const jsonFilePath = "/data.json";
 
 // select parents to easy traverse through thier children .
 const nav = document.querySelector("nav");
