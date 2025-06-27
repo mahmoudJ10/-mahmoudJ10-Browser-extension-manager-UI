@@ -1,78 +1,5 @@
 // fetch json file
-const data = [
-    {
-        "logo": "./assets/images/logo-devlens.svg",
-        "name": "DevLens",
-        "description": "Quickly inspect page layouts and visualize element boundaries.",
-        "isActive": true
-    },
-    {
-        "logo": "./assets/images/logo-style-spy.svg",
-        "name": "StyleSpy",
-        "description": "Instantly analyze and copy CSS from any webpage element.",
-        "isActive": true
-    },
-    {
-        "logo": "./assets/images/logo-speed-boost.svg",
-        "name": "SpeedBoost",
-        "description": "Optimizes browser resource usage to accelerate page loading.",
-        "isActive": false
-    },
-    {
-        "logo": "./assets/images/logo-json-wizard.svg",
-        "name": "JSONWizard",
-        "description": "Formats, validates, and prettifies JSON responses in-browser.",
-        "isActive": true
-    },
-    {
-        "logo": "./assets/images/logo-tab-master-pro.svg",
-        "name": "TabMaster Pro",
-        "description": "Organizes browser tabs into groups and sessions.",
-        "isActive": true
-    },
-    {
-        "logo": "./assets/images/logo-viewport-buddy.svg",
-        "name": "ViewportBuddy",
-        "description": "Simulates various screen resolutions directly within the browser.",
-        "isActive": false
-    },
-    {
-        "logo": "./assets/images/logo-markup-notes.svg",
-        "name": "Markup Notes",
-        "description": "Enables annotation and notes directly onto webpages for collaborative debugging.",
-        "isActive": true
-    },
-    {
-        "logo": "./assets/images/logo-grid-guides.svg",
-        "name": "GridGuides",
-        "description": "Overlay customizable grids and alignment guides on any webpage.",
-        "isActive": false
-    },
-    {
-        "logo": "./assets/images/logo-palette-picker.svg",
-        "name": "Palette Picker",
-        "description": "Instantly extracts color palettes from any webpage.",
-        "isActive": true
-    },
-    {
-        "logo": "./assets/images/logo-link-checker.svg",
-        "name": "LinkChecker",
-        "description": "Scans and highlights broken links on any page.",
-        "isActive": true
-    },
-    {
-        "logo": "./assets/images/logo-dom-snapshot.svg",
-        "name": "DOM Snapshot",
-        "description": "Capture and export DOM structures quickly.",
-        "isActive": false
-    },
-    {
-        "logo": "./assets/images/logo-console-plus.svg",
-        "name": "ConsolePlus",
-        "description": "Enhanced developer console with advanced filtering and logging.",
-        "isActive": true
-    }
-  ];
+const jsonFilePath = "/data.json";
 
 // select parents to easy traverse through thier children .
 const nav = document.querySelector("nav");
@@ -81,7 +8,93 @@ const filterBTNsContainer = document.querySelector(".filter-btns");
 const heroContainer = document.querySelector(".container");
 
 /***************/
+let allCards = [];
+let activeCards = [];
+let inactiveCards = [];
+let isThemeChange = true;
+// default active filter-button which is 'all' to show all cards
+let currentActive = filterBTNsContainer.querySelectorAll(".filter-btns-btn")[0];
 
+const data = [
+  {
+    logo: "./assets/images/logo-devlens.svg",
+    name: "DevLens",
+    description:
+      "Quickly inspect page layouts and visualize element boundaries.",
+    isActive: true
+  },
+  {
+    logo: "./assets/images/logo-style-spy.svg",
+    name: "StyleSpy",
+    description: "Instantly analyze and copy CSS from any webpage element.",
+    isActive: true
+  },
+  {
+    logo: "./assets/images/logo-speed-boost.svg",
+    name: "SpeedBoost",
+    description: "Optimizes browser resource usage to accelerate page loading.",
+    isActive: false
+  },
+  {
+    logo: "./assets/images/logo-json-wizard.svg",
+    name: "JSONWizard",
+    description:
+      "Formats, validates, and prettifies JSON responses in-browser.",
+    isActive: true
+  },
+  {
+    logo: "./assets/images/logo-tab-master-pro.svg",
+    name: "TabMaster Pro",
+    description: "Organizes browser tabs into groups and sessions.",
+    isActive: true
+  },
+  {
+    logo: "./assets/images/logo-viewport-buddy.svg",
+    name: "ViewportBuddy",
+    description:
+      "Simulates various screen resolutions directly within the browser.",
+    isActive: false
+  },
+  {
+    logo: "./assets/images/logo-markup-notes.svg",
+    name: "Markup Notes",
+    description:
+      "Enables annotation and notes directly onto webpages for collaborative debugging.",
+    isActive: true
+  },
+  {
+    logo: "./assets/images/logo-grid-guides.svg",
+    name: "GridGuides",
+    description:
+      "Overlay customizable grids and alignment guides on any webpage.",
+    isActive: false
+  },
+  {
+    logo: "./assets/images/logo-palette-picker.svg",
+    name: "Palette Picker",
+    description: "Instantly extracts color palettes from any webpage.",
+    isActive: true
+  },
+  {
+    logo: "./assets/images/logo-link-checker.svg",
+    name: "LinkChecker",
+    description: "Scans and highlights broken links on any page.",
+    isActive: true
+  },
+  {
+    logo: "./assets/images/logo-dom-snapshot.svg",
+    name: "DOM Snapshot",
+    description: "Capture and export DOM structures quickly.",
+    isActive: false
+  },
+  {
+    logo: "./assets/images/logo-console-plus.svg",
+    name: "ConsolePlus",
+    description:
+      "Enhanced developer console with advanced filtering and logging.",
+    isActive: true
+  }
+];
 function getCardIndex(card, allCards) {
   const index = allCards.indexOf(card);
 
@@ -97,9 +110,6 @@ function deleteCard(currentFilterButton, card, allCards) {
   currentFilterButton.click();
 }
 
-let allCards = [];
-let activeCards = [];
-let inactiveCards = [];
 // points on image index to be rendered in nav --> button .
 
 function showAllCards(allCards, container) {
@@ -136,11 +146,6 @@ function showInactiveCards(allCards, container) {
   });
   console.log(inactiveCards);
 }
-
-const imageSRC = [
-  "./assets/images/icon-sun.svg",
-  "./assets/images/icon-moon.svg"
-];
 
 (function createCards(cardsNum = 1) {
   for (let i = 0; i < cardsNum; i++) {
@@ -187,16 +192,17 @@ function populateCards(data, cards) {
     const image = element.querySelector("img");
     const title = element.querySelector(".card-text>h2");
     const desc = element.querySelector(".card-text>p");
-    console.log("aces");
+    image.setAttribute("alt", data[index].name);
     image.setAttribute("src", data[index].logo);
     title.innerText = data[index].name;
     desc.innerText = data[index].description;
     element.setAttribute("data-isActive", data[index].isActive);
   });
 }
- populateCards(data, cardContainer.querySelectorAll(".card"));
+populateCards(data, cardContainer.querySelectorAll(".card"));
 
-function switchTheme(parent, elements) {
+// change theme for specific compoenents
+function switchThemeFor(parent, elements) {
   if (parent) {
     elements.forEach((element) => {
       element.classList.toggle("dark-mode-parent");
@@ -220,27 +226,25 @@ function flipButtonBG(isThemeChange = true) {
   return !isThemeChange;
 }
 
-let isThemeChange = true;
-nav.querySelector(".nav-btn").addEventListener("click", () => {
-  // elements that will have parent style --- it's not mandatory its a parent ---
-  const parents = [
-    heroContainer.querySelector(".title"),
-    document.body,
-    cardContainer
-  ];
-  // elements that will have parent child --- it's not mandatory its a child ---
-  const children = [
-    nav,
-    nav.querySelector(".nav-btn"),
-    ...allCards,
-    ...[...filterBTNsContainer.querySelectorAll(".filter-btns-btn")]
-  ];
-
-  switchTheme(true, parents);
-  switchTheme(false, children);
+// change Theme for all compoenents
+function changeTheme(parents, children) {
+  switchThemeFor(true, parents);
+  switchThemeFor(false, children);
   isThemeChange = flipButtonBG(isThemeChange);
+}
+nav.querySelector(".nav-btn").addEventListener("click", () => {
+  // elements that will have parent child --- it's not mandatory its a child ---
+  // elements that will have parent style --- it's not mandatory its a parent ---
+  changeTheme(
+    [heroContainer.querySelector(".title"), document.body, cardContainer],
+    [
+      nav,
+      nav.querySelector(".nav-btn"),
+      ...allCards,
+      ...[...filterBTNsContainer.querySelectorAll(".filter-btns-btn")]
+    ]
+  );
 });
-let currentActive = filterBTNsContainer.querySelectorAll(".filter-btns-btn")[0];
 
 // returns button status all active  or inactive
 function getButtonStatus(button, classIndex = 0) {
@@ -253,7 +257,6 @@ function getButtonStatus(button, classIndex = 0) {
 // change active filter-button on click .(via event propagation , which is cleaner than using foreach)
 filterBTNsContainer.addEventListener("click", (el) => {
   const clicked = el.target;
-
   if (el.target.tagName == "BUTTON") {
     currentActive.classList.remove("active");
     clicked.classList.add("active");
@@ -262,7 +265,7 @@ filterBTNsContainer.addEventListener("click", (el) => {
   }
 });
 // recieve the index of the class which have the status ex: active-btn --> returns active
-
+// Event Propagation and Delagation technique is applied .
 cardContainer.addEventListener("click", (el) => {
   const clicked = el.target;
   if (clicked.classList.contains("remove-btn")) {
@@ -293,12 +296,5 @@ function filterCards(active, allCards) {
 
     default:
       console.log("No Case Found");
-  }
-}
-
-function fillt(status, cards) {
-  switch (status) {
-    case "all": {
-    }
   }
 }

@@ -129,13 +129,11 @@ nav {
   transition: background-color 0.2s ease-in-out;
 }
 .card .switch-btn {
-  width: 2.5rem;
+  width: 2.7rem;
   height: 20px;
   /* for div alignemnt */
-  place-content: center;
-  align-items: center;
-  place-self: center;
-
+  border: none;
+  padding: 3px 2px;
   /* Solve problem placing it to end , which will not be user friendly  */
   margin-left: auto;
   /* border: 1px solid red; */
